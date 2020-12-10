@@ -5,7 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 export default function Login(props) {
     function signin(event) {
         event.preventDefault();
-        Auth.authenticate(event.target['name'].value, event.target['password'].value)
+        if(event.target['name'].value !== '' || event.target['password'].value !== '') {
+            Auth.authenticate(event.target['name'].value, event.target['password'].value)
             .then(result => {
                 props.loginSuccess(result.data);
                 props.history.push(props.redirectPathOnSuccess);
@@ -14,6 +15,10 @@ export default function Login(props) {
             .catch((error) => {
                 props.loginFail()
             })
+        }
+        else {
+            alert("Fill the form!");
+        }
     }
     return (
         <div className="form">
@@ -22,7 +27,7 @@ export default function Login(props) {
                     <li className="title">Sign-In</li>
                     <li>
                         <label>User Name</label>
-                        <input type="text" id="name" name="name" placeholder="Email..." />
+                        <input type="text" id="name" name="name" placeholder="Username..." />
                     </li>
                     <li>
                         <label>Password</label>

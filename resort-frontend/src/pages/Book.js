@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import defaultBcg from '../images/room-1.jpeg';
 import axios from 'axios';
+import myURL from '../myURL';
+import myAuth from './Auth';
 
 
 export default class Booknow extends Component {
@@ -40,8 +42,8 @@ export default class Booknow extends Component {
     submit = event => {
         event.preventDefault();
         var start = new Date(this.state.startDate),
-            month1 = '' + (start.getMonth() + 1),
-            day1 = '' + (start.getDate() + 1),
+            month1 = '' + (start.getMonth()),
+            day1 = '' + (start.getDate()),
             year1 = start.getFullYear();
 
         if (month1.length < 2)
@@ -52,8 +54,8 @@ export default class Booknow extends Component {
         var start_day = [year1, month1, day1].join('-');
 
         var end = new Date(this.state.endDate),
-            month2 = '' + (end.getMonth() + 1),
-            day2 = '' + (end.getDate() + 1),
+            month2 = '' + (end.getMonth()),
+            day2 = '' + (end.getDate()),
             year2 = end.getFullYear();
 
         if (month2.length < 2)
@@ -68,7 +70,8 @@ export default class Booknow extends Component {
         const room = getRoom(this.state.slug);
         const { id } = room;
         console.log(id);
-        axios.post('http://localhost:3000/book', {
+        //axios.post('http://localhost:3000/book', {
+        axios.post(myURL+'book', {
             id_room: id,
             id_customer: this.props.userInfo,
             date_begin: start_day,
@@ -108,7 +111,8 @@ export default class Booknow extends Component {
                     <form onSubmit={this.submit}>
                         <section className="single-room">
                             <div className="single-room-images">
-                                <img src={'http://localhost:3000/' + mainImg || defaultBcg} className="img-fluid" alt={name} />
+                                {/* <img src={'http://localhost:3000/' + mainImg || defaultBcg} className="img-fluid" alt={name} /> */}
+                                <img src={myURL + mainImg || defaultBcg} className="img-fluid" alt={name} />
                             </div>
                             <div className="single-room-info">
                                 <article className="desc">

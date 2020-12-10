@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import myURL from '../myURL';
 
 export default function Register(props) {
     function register(event) {
@@ -9,7 +10,8 @@ export default function Register(props) {
         var name = event.target['username'].value;
         var email = event.target['email'].value;
         var password = event.target['password'].value;
-        axios.get('http://localhost:3000/user').then(res => {
+        // axios.get('http://localhost:3000/user').then(res => {
+        axios.get(myURL+'user').then(res => {
             var nameRes = res.data.find(e => e.name === event.target['username'].value)
             var idRes = res.data.find(e => e.id_customer === event.target['id'].value)
             console.log(idRes);
@@ -17,7 +19,8 @@ export default function Register(props) {
                 alert("Exists uername or id")
             }
             else {
-                axios.post('http://localhost:3000/user', {
+                //axios.post('http://localhost:3000/user', {
+                axios.post(myURL+'user', {
                     name, id_customer, email, password
                 })
                     .then((response) => {

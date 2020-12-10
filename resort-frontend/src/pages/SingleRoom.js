@@ -4,6 +4,7 @@ import Banner from '../components/banner';
 import {Link} from 'react-router-dom';
 import {RoomContext} from '../context';
 import StyledHero from '../components/StyledHero';
+import myURL from '../myURL';
 
 export default class SingleRoom extends Component {
     constructor(props){
@@ -31,7 +32,7 @@ export default class SingleRoom extends Component {
         }
         const{name,description,capacity,size,price,extras,breakfast,pets,images} = room;
         const [mainImg,...defaultImg] = images;
-
+            console.log(images);
         return (
             <div>
                 <div>
@@ -46,7 +47,8 @@ export default class SingleRoom extends Component {
                         <div className="single-room-images">
                             {defaultImg.map((item,index)=>{
                                 console.log(item)
-                                return <img key={index} src={'http://localhost:3000/' + item} alt={name}/>;
+                                // return <img key={index} src={'http://localhost:3000/' + item} alt={name}/>;
+                                return <img key={index} src={myURL + item} alt={name}/>;
                             })}
                         </div>
                         <div className="single-room-info">

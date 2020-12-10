@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import History from './pages/History';
 import Axios from 'axios';
+import myURL from './myURL';
 
 class App extends Component {
     constructor(props) {
@@ -32,7 +33,8 @@ class App extends Component {
                     })
         console.log(this.state.userInfo)
         console.log(user);
-        Axios.get('http://localhost:3000/history/' + this.state.userInfo).then(res => {
+        // Axios.get('http://localhost:3000/history/' + this.state.userInfo).then(res => {
+        Axios.get(myURL+'history/' + this.state.userInfo).then(res => {
             this.setState({ historyInfo: res.data })
             console.log(this.state.historyInfo);
             console.log(res.data)
@@ -44,6 +46,7 @@ class App extends Component {
     onLoginFail = () => {
         this.setState({ isAuthenticated: false });
         console.log("Login failed");
+        alert("Login fail!");
     }
 
     onLogOut = () => {
@@ -51,7 +54,8 @@ class App extends Component {
     }
 
     getHistory = () => {
-        Axios.get('http://localhost:3000/history/' + this.state.userInfo).then(res => {
+        // Axios.get('http://localhost:3000/history/' + this.state.userInfo).then(res => {
+        Axios.get(myURL+'history/' + this.state.userInfo).then(res => {
             this.setState({ historyInfo: res.data })
             console.log(this.state.historyInfo);
         }).catch(err => {
@@ -61,7 +65,8 @@ class App extends Component {
 
     Delete = (id) => {
         const tempData = this.state.historyInfo.filter(item => item.id_room !== id);
-        Axios.delete('http://localhost:3000/book/' + id).then(res => {
+        // Axios.delete('http://localhost:3000/book/' + id).then(res => {
+        Axios.delete(myURL+'book/' + id).then(res => {
             this.setState({ historyInfo: tempData});
         }).catch(err => {
             console.log(err);

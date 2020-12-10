@@ -1,4 +1,5 @@
 import axios from 'axios';
+import myURL from '../myURL';
 
 let userInfo = {
     username: null,
@@ -8,7 +9,8 @@ let userInfo = {
 let myAuth = {
     authenticate: (username, password) => {
         return new Promise((resolve, reject) => {
-            axios.get('http://localhost:3000/user/' + username,
+            //axios.get('http://localhost:3000/user/' + username,
+            axios.get(myURL+'user/' + username,
                 {
                     auth: {
                         username: username,

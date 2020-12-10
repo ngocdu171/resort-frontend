@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { GiAxeInLog } from 'react-icons/gi';
 //import items from './data';
 import axios from 'axios';
+import myURL from './myURL';
 
 const RoomContext = React.createContext();
 class RoomProvider extends Component {
@@ -26,7 +27,8 @@ class RoomProvider extends Component {
     }
     // getData
     componentDidMount() {
-        axios.get('http://localhost:3000/room').then(
+        // axios.get('http://localhost:3000/room').then(
+        axios.get(myURL+'room').then(
             res => {
                 this.setState({ items: res.data })
             }
@@ -98,6 +100,7 @@ class RoomProvider extends Component {
     };
 
     render() {
+        console.log(this.state.rooms);
         return (
             <RoomContext.Provider value={{
                 ...this.state, getRoom: this.getRoom, handleChange: this.handleChange
